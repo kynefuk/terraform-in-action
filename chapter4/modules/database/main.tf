@@ -1,4 +1,4 @@
-resource "random_password" "password" {
+resource "random_password" "password" { #A
   length           = 16
   special          = true
   override_special = "_%@/'\""
@@ -13,7 +13,7 @@ resource "aws_db_instance" "database" {
   name                   = "pets"
   username               = "admin"
   password               = random_password.password.result
-  db_subnet_group_name   = var.vpc.database_subnet_group
-  vpc_security_group_ids = [var.sg.db]
+  db_subnet_group_name   = var.vpc.database_subnet_group #B
+  vpc_security_group_ids = [var.sg.db]                   #B
   skip_final_snapshot    = true
 }
